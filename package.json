@@ -1,0 +1,12 @@
+{
+  "name": "tab-shortcuts",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "vite": "^6.3.0",
+    "vitest": "^3.1.0"
+  }
+}

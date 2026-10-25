@@ -1,0 +1,128 @@
+{
+  "manifest_version": 3,
+  "name": "Tab Shortcuts",
+  "version": "1.1.4",
+  "description": "Keyboard shortcuts for tab navigation, management, and browser page access. Works in Chrome, Brave, Edge, and Firefox.",
+  "permissions": [
+    "tabs",
+    "alarms",
+    "contextMenus",
+    "storage"
+  ],
+  "background": {
+    "scripts": ["js/background.js"]
+  },
+  "commands": {
+    "tab-previous": {
+      "description": "Select previous tab",
+      "suggested_key": {
+        "default": "Ctrl+Comma",
+        "mac": "Command+Shift+Comma"
+      }
+    },
+    "tab-next": {
+      "description": "Select next tab",
+      "suggested_key": {
+        "default": "Ctrl+Period",
+        "mac": "Command+Period"
+      }
+    },
+    "tab-move-previous": {
+      "description": "Move tab left"
+    },
+    "tab-move-next": {
+      "description": "Move tab right"
+    },
+    "tab-move-first": {
+      "description": "Move tab to first"
+    },
+    "tab-move-last": {
+      "description": "Move tab to last"
+    },
+    "tab-close": {
+      "description": "Close current tab"
+    },
+    "tab-new": {
+      "description": "New tab"
+    },
+    "tab-duplicate": {
+      "description": "Duplicate tab"
+    },
+    "tab-pin": {
+      "description": "Pin / Unpin tab"
+    },
+    "tab-mute": {
+      "description": "Mute / Unmute tab"
+    },
+    "tab-reload": {
+      "description": "Reload tab"
+    },
+    "tab-discard": {
+      "description": "Unload tab from memory"
+    },
+    "tab-back": {
+      "description": "Go back"
+    },
+    "tab-forward": {
+      "description": "Go forward"
+    },
+    "tab-new-left": {
+      "description": "New tab to the left",
+      "suggested_key": {
+        "default": "Alt+H",
+        "mac": "Alt+H"
+      }
+    },
+    "tab-new-right": {
+      "description": "New tab to the right",
+      "suggested_key": {
+        "default": "Alt+Space",
+        "mac": "Alt+Space"
+      }
+    },
+    "window-new": {
+      "description": "New window"
+    },
+    "window-incognito": {
+      "description": "New incognito window"
+    },
+    "open-bookmarks": {
+      "description": "Open Bookmarks"
+    },
+    "open-downloads": {
+      "description": "Open Downloads"
+    },
+    "open-extensions": {
+      "description": "Open Extensions"
+    },
+    "open-history": {
+      "description": "Open History"
+    },
+    "open-settings": {
+      "description": "Open Settings",
+      "suggested_key": {
+        "default": "Ctrl+Comma",
+        "mac": "Command+Comma"
+      }
+    },
+    "open-flags": {
+      "description": "Open Flags / Config"
+    },
+    "open-help": {
+      "description": "Open Browser Help"
+    },
+    "open-shortcuts": {
+      "description": "Open Extension Shortcuts"
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "tab-shortcuts@turtle.local",
+      "strict_min_version": "109.0"
+    }
+  }
+}

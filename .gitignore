@@ -1,0 +1,6 @@
+
+# local Trellis kernel state
+/.trellis/
+node_modules/
+.DS_Store
+__pycache__/

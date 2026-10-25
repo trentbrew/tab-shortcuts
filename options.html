@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Tab Shortcuts</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: #1a1a2e;
+      color: #e0e0e0;
+      padding: 32px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    .subtitle {
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    .primary-btn {
+      display: inline-block;
+      background: #7c83ff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 24px;
+    }
+    .primary-btn:hover { background: #6a72ee; }
+    .section { margin-bottom: 24px; }
+    .section-title {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #7c83ff;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #2a2a4a;
+    }
+    .shortcut {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 10px 12px;
+      border: none;
+      border-bottom: 1px solid #1f1f3a;
+      background: transparent;
+      color: inherit;
+      text-align: left;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+    .shortcut:last-child { border-bottom: none; }
+    .shortcut:hover { background: #23233f; }
+    .shortcut-name {
+      font-size: 14px;
+      color: #ccc;
+    }
+    .shortcut-key {
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 12px;
+      white-space: nowrap;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid #3a3a5a;
+      background: #2a2a4a;
+      color: #fff;
+    }
+    .shortcut-key.unset {
+      color: #ffb347;
+      border-color: #5a4a2a;
+      background: #2a2418;
+    }
+    .shortcut-key.recommended {
+      color: #aaa;
+      border-style: dashed;
+    }
+    .note {
+      background: #1f1f3a;
+      border-left: 3px solid #7c83ff;
+      padding: 12px 16px;
+      border-radius: 0 6px 6px 0;
+      font-size: 13px;
+      color: #aaa;
+      margin-top: 24px;
+      line-height: 1.5;
+    }
+    .warning {
+      background: #3a2a1a;
+      border-left: 3px solid #ffb347;
+      padding: 12px 16px;
+      border-radius: 0 6px 6px 0;
+      font-size: 13px;
+      color: #ddd;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tab Shortcuts</h1>
+  <p class="subtitle">
+    Your configured shortcuts are shown below. To change a binding, open
+    Keyboard shortcuts settings.
+  </p>
+
+  <button type="button" class="primary-btn" id="open-shortcuts-btn">
+    Open Keyboard Shortcuts Settings
+  </button>
+
+  <div id="setup-warning" class="warning" hidden>
+    <strong>Shortcuts not assigned yet.</strong>
+    Chromium: quit the browser and run
+    <code>node scripts/apply-shortcuts.mjs brave</code>.
+    Firefox: reload the extension — shortcuts apply automatically from
+    <code>shortcuts.json</code>.
+  </div>
+
+  <div class="section">
+    <div class="section-title">Tab Navigation</div>
+    <button type="button" class="shortcut" data-command="tab-previous"><span class="shortcut-name">Previous tab</span><span class="shortcut-key unset" id="s-tab-previous">Click to assign</span></button>
+    <button type="button" class="shortcut" data-command="tab-next"><span class="shortcut-name">Next tab</span><span class="shortcut-key unset" id="s-tab-next">Click to assign</span></button>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Tab Movement</div>
+    <button type="button" class="shortcut" data-command="tab-move-previous"><span class="shortcut-name">Move tab left</span><span class="shortcut-key unset" id="s-tab-move-previous">Click to assign</span></button>
+    <button type="button" class="shortcut" data-command="tab-move-next"><span class="shortcut-name">Move tab right</span><span class="shortcut-key unset" id="s-tab-move-next">Click to assign</span></button>
+    <button type="button" class="shortcut" data-command="tab-move-first"><span class="shortcut-name">Move to first</span><span class="shortcut-key unset" id="s-tab-move-first">Click to assign</span></button>
+    <button type="button" class="shortcut" data-command="tab-move-last"><span class="shortcut-name">Move to last</span><span class="shortcut-key unset" id="s-tab-move-last">Click to assign</span></button>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Tab Actions</div>
+    <button type="button" class="shortcut" data-command="tab-close"><span class="shortcut-name">Close tab</span><span class="shortcut-key unset" id="s-tab-close">Click to assign</span></button>
+    <button type="button" class="shortcut" data-command="tab-new"><span class="shortcut-name">New tab</span><span class="shortcut-key unset" id="s-tab-new">Click to assign</span></button>
+    <button type="button" class="shortcut" data-command="tab-duplicate"><span class="shortcut-name">Duplicate tab</span><span class="shortcut-key unset" id="s-tab-duplicate">Click to assign</span></button>
+    <button type="button" class="shortcut" data-command="tab-pin"><span class="shortcut-name">Pin / Unpin</span><span class="shortcut-key unset" id="s-tab-pin">Click to assign</span></button>
+    <button type="button" class="shortcut" data-command="tab-mute"><span class="shortcut-name">Mute / Unmute</span><span class="shortcut-key unset" id="s-tab-mute">Click to assign</span></button>
+    <button type="button" class="shortcut" data-command="tab-reload"><span class="shortcut-name">Reload</span><span class="shortcut-key unset" id="s-tab-reload">Click to assign</span></button>
+    <button type="button" class="shortcut" data-command="tab-discard"><span class="shortcut-name">Discard (unload)</span><span class="shortcut-key unset" id="s-tab-discard">Click to assign</span></button>
+    <button type="button" class="shortcut" data-command="tab-back"><span class="shortcut-name">Go back</span><span class="shortcut-key unset" id="s-tab-back">Click to assign</span></button>
+    <button type="button" class="shortcut" data-command="tab-forward"><span class="shortcut-name">Go forward</span><span class="shortcut-key unset" id="s-tab-forward">Click to assign</span></button>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Adjacent Tabs</div>
+    <button type="button" class="shortcut" data-command="tab-new-left"><span class="shortcut-name">New tab to the left</span><span class="shortcut-key unset" id="s-tab-new-left">Click to assign</span></button>
+    <button type="button" class="shortcut" data-command="tab-new-right"><span class="shortcut-name">New tab to the right</span><span class="shortcut-key unset" id="s-tab-new-right">Click to assign</span></button>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Windows</div>
+    <button type="button" class="shortcut" data-command="window-new"><span class="shortcut-name">New window</span><span class="shortcut-key unset" id="s-window-new">Click to assign</span></button>
+    <button type="button" class="shortcut" data-command="window-incognito"><span class="shortcut-name">New incognito window</span><span class="shortcut-key unset" id="s-window-incognito">Click to assign</span></button>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Browser Pages</div>
+    <button type="button" class="shortcut" data-command="open-bookmarks"><span class="shortcut-name">Bookmarks</span><span class="shortcut-key unset" id="s-open-bookmarks">Click to assign</span></button>
+    <button type="button" class="shortcut" data-command="open-downloads"><span class="shortcut-name">Downloads</span><span class="shortcut-key unset" id="s-open-downloads">Click to assign</span></button>
+    <button type="button" class="shortcut" data-command="open-extensions"><span class="shortcut-name">Extensions</span><span class="shortcut-key unset" id="s-open-extensions">Click to assign</span></button>
+    <button type="button" class="shortcut" data-command="open-history"><span class="shortcut-name">History</span><span class="shortcut-key unset" id="s-open-history">Click to assign</span></button>
+    <button type="button" class="shortcut" data-command="open-settings"><span class="shortcut-name">Settings</span><span class="shortcut-key unset" id="s-open-settings">Click to assign</span></button>
+    <button type="button" class="shortcut" data-command="open-flags"><span class="shortcut-name">Flags</span><span class="shortcut-key unset" id="s-open-flags">Click to assign</span></button>
+    <button type="button" class="shortcut" data-command="open-help"><span class="shortcut-name">Help</span><span class="shortcut-key unset" id="s-open-help">Click to assign</span></button>
+  </div>
+
+  <div class="note">
+    Shortcuts are assigned in the browser, not on this page.
+    After assigning, reload this tab to see updated keys.
+    Right-click any tab for "New tab left/right".
+  </div>
+
+  <script>
+    function isFirefoxBrowser() {
+      const ua = navigator.userAgent;
+      return /Firefox\//.test(ua) && !/Chrome\//.test(ua);
+    }
+
+    function getChromiumScheme() {
+      const ua = navigator.userAgent;
+      if (/Brave\//.test(ua)) return 'brave';
+      if (/Edg\//.test(ua)) return 'edge';
+      return 'chrome';
+    }
+
+    const api = isFirefoxBrowser() ? browser : chrome;
+    const isFirefox = isFirefoxBrowser();
+
+    // Source of truth for display (matches shortcuts.json / apply script)
+    const RECOMMENDED = {
+      'tab-previous': '⌘ ⇧ ,',
+      'tab-next': '⌘ .',
+      'tab-move-previous': '⌥ ,',
+      'tab-move-next': '⌥ .',
+      'tab-close': '⌥ X',
+      'tab-discard': '⌥ ⇧ X',
+      'tab-mute': '⌥ M',
+      'tab-pin': '⌘ P',
+      'tab-duplicate': '⌘ ⇧ D',
+      'tab-back': '⌘ ←',
+      'tab-forward': '⌘ →',
+      'tab-new-left': '⌥ H',
+      'tab-new-right': '⌥ Space',
+      'window-new': '⌘ ⇧ N',
+      'window-incognito': '⌥ ⇧ N',
+      'open-settings': '⌘ ,',
+      'open-extensions': '⌘ ⇧ X',
+      'open-shortcuts': '⌘ ⇧ K',
+      'open-flags': '⌥ F',
+    };
+
+    function formatShortcut(shortcut) {
+      return shortcut
+        .replace(/Command\+/g, '⌘ ')
+        .replace(/Alt\+/g, '⌥ ')
+        .replace(/Shift\+/g, '⇧ ')
+        .replace(/\+/g, ' ')
+        .replace(/Comma/g, ',')
+        .replace(/Period/g, '.')
+        .replace(/Left/g, '←')
+        .replace(/Right/g, '→')
+        .replace(/Space/g, 'Space');
+    }
+
+    async function openShortcutsPage() {
+      if (isFirefox && api.commands?.openShortcutSettings) {
+        await api.commands.openShortcutSettings();
+        return;
+      }
+      await api.tabs.create({
+        url: isFirefox ? 'about:addons' : `${getChromiumScheme()}://extensions/shortcuts`,
+      });
+    }
+
+    document.getElementById('open-shortcuts-btn').addEventListener('click', openShortcutsPage);
+
+    document.querySelectorAll('.shortcut').forEach((row) => {
+      row.addEventListener('click', openShortcutsPage);
+    });
+
+    function setKeyDisplay(el, label, isAssigned) {
+      el.textContent = label;
+      el.classList.toggle('unset', !isAssigned);
+      el.classList.remove('recommended');
+    }
+
+    async function refreshShortcuts() {
+      let commands = [];
+      try {
+        commands = await api.commands.getAll();
+      } catch (err) {
+        console.warn('[Tab Shortcuts] getAll failed:', err);
+      }
+
+      let configuredCount = 0;
+
+      document.querySelectorAll('[id^="s-"]').forEach((el) => {
+        const name = el.id.slice(2);
+        const cmd = commands.find((c) => c.name === name);
+        const recommended = RECOMMENDED[name];
+
+        if (cmd?.shortcut) {
+          configuredCount += 1;
+          setKeyDisplay(el, formatShortcut(cmd.shortcut), true);
+        } else if (recommended) {
+          configuredCount += 1;
+          setKeyDisplay(el, recommended, true);
+        } else {
+          setKeyDisplay(el, 'Click to assign', false);
+        }
+      });
+
+      document.getElementById('setup-warning').hidden = configuredCount > 0;
+    }
+
+    refreshShortcuts();
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') refreshShortcuts();
+    });
+  </script>
+</body>
+</html>
